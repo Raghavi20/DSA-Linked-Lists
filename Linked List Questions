@@ -1,0 +1,124 @@
+Merge Two Sorted Lists:
+https://leetcode.com/problems/merge-two-sorted-lists/
+
+class Solution:
+    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        dummyPointer = currentPointer = ListNode(-1)
+        
+        while list1 and list2:
+            if list1.val < list2.val:
+                currentPointer.next = list1
+                list1 = list1.next
+            else:
+                currentPointer.next = list2
+                list2 = list2.next
+            currentPointer = currentPointer.next
+        if list1 == None:
+            currentPointer.next = list2
+        if list2 == None:
+            currentPointer.next = list1
+        return dummyPointer.next
+            
+        (OR)
+        
+class Solution:
+    def mergeTwoLists(self, head1: Optional[ListNode], head2: Optional[ListNode]) -> Optional[ListNode]:
+
+        if not head1 or not head2:
+            return head1 or head2
+
+        if head1.val <= head2.val:
+            HEAD = head1
+            s = head1
+            f1 = head1.next
+            f2 = head2
+        else:
+            HEAD = head2
+            s = head2
+            f1 = head2.next
+            f2 = head1
+
+        while f1 and f2:
+            if f2.val < f1.val:
+                s.next = f2
+                s = f2
+                f2 = f2.next
+            else:
+                s.next = f1
+                s = f1
+                f1 = f1.next
+
+        if f2:
+            s.next = f2
+        if f1:
+            s.next = f1
+
+        
+        return HEAD
+        
+ --------------------------------------------------------------------------------------------------------
+ 2. Delete Node in a Linked List
+ https://leetcode.com/problems/delete-node-in-a-linked-list/
+ 
+ class Solution:
+    def deleteNode(self, node):
+        """
+        :type node: ListNode
+        :rtype: void Do not return anything, modify node in-place instead.
+        """
+        node.val = node.next.val
+        node.next = node.next.next
+        return
+        
+ ----------------------------------------------------------------------------------------------------------
+ 3. Remove Linked List Elements:
+ https://leetcode.com/problems/remove-linked-list-elements/
+ 
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def removeElements(self, head, val):
+        dummyNode = ListNode(-1)
+        dummyNode.next = head
+        curr = head
+        prev = dummyNode
+        while curr != None:
+            if curr.val == val:
+                prev.next = curr.next
+            else:
+                prev = curr
+            curr = curr.next
+        return dummyNode.next
+----------------------------------------------------------------------------------------
+4. Reverse Linked List
+https://leetcode.com/problems/reverse-linked-list/
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        prev = None
+        tempNode = None
+        curr = head
+        while curr != None:
+            tempNode = curr.next
+            curr.next = prev
+            prev = curr
+            curr = tempNode
+        return prev
+        
+----------------------------------------------------------------------------------------
+5. Add Two Numbers:
+
+        
+        
+        
+        
+        
+       
