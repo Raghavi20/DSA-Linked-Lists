@@ -115,9 +115,62 @@ class Solution:
         
 ----------------------------------------------------------------------------------------
 5. Add Two Numbers:
+https://leetcode.com/problems/add-two-numbers/
 
+
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        dummyNode = res = ListNode(-1)
         
+        carry = 0
         
+        while l1 != None and l2 != None:
+            curr = l1.val+l2.val+carry
+            carry = curr//10
+            
+            node = ListNode(curr%10)
+            
+            res.next = node
+            
+            l1 = l1.next
+            l2 = l2.next
+            res = res.next
+            
+        #if anything left
+        while l1 != None:
+            curr=l1.val+carry
+            carry = curr//10
+            node = ListNode(curr%10)
+            
+            res.next = node
+            l1=l1.next
+            res = res.next
+            
+        while l2 != None:
+            curr=l2.val+carry
+            carry = curr//10
+            node = ListNode(curr%10)
+            
+            res.next = node
+            l2=l2.next
+            res = res.next
+        
+        #atlast if carry is not 0
+        if carry==1:
+            node = ListNode(carry)
+            res.next = node
+            
+            
+            
+        return dummyNode.next
+            
+--------------------------------------------------------------------------------------------------    
         
         
         
