@@ -171,6 +171,115 @@ class Solution:
         return dummyNode.next
             
 --------------------------------------------------------------------------------------------------    
+6. Add Two Numbers 2
+https://leetcode.com/problems/add-two-numbers-ii/
+
+
+
+class Solution:
+    def addTwoNumbers(self, l1,l2):
+        return self.reverse(self.addTwoNumbersInReverse(self.reverse(l1),self.reverse(l2)))
+        
+        
+    def reverse(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        prev = None
+        tempNode = None
+        curr = head
+        while curr:
+            tempNode = curr.next
+            curr.next = prev
+            prev = curr
+            curr = tempNode
+        return prev
+    
+    
+    def addTwoNumbersInReverse(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        dummyPtr = res = ListNode(-1)
+        
+        carry = 0
+        
+        while l1 != None and l2 != None:
+            curr = l1.val+l2.val+carry
+            carry = curr//10
+            
+            node = ListNode(curr%10)
+            
+            res.next = node
+            
+            l1 = l1.next
+            l2 = l2.next
+            res = res.next
+            
+        #if anything left
+        while l1 != None:
+            curr=l1.val+carry
+            carry = curr//10
+            node = ListNode(curr%10)
+            
+            res.next = node
+            l1=l1.next
+            res = res.next
+            
+        while l2 != None:
+            curr=l2.val+carry
+            carry = curr//10
+            node = ListNode(curr%10)
+            
+            res.next = node
+            l2=l2.next
+            res = res.next
+        
+        #atlast if carry is not 0
+        if carry==1:
+            node = ListNode(carry)
+            res.next = node
+            
+            
+            
+        return dummyPtr.next
+            
+
+----------------------------------------------------------------------------------------------------
+7. Middle Of The Linked List
+https://leetcode.com/problems/middle-of-the-linked-list/
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if head == None:
+            return None
+        slow = head
+        fast = head
+        
+        while fast.next != None and fast.next.next != None:
+            slow = slow.next
+            fast = fast.next.next
+        if fast.next != None:
+            return slow.next
+        
+            
+        return slow
+        
+        or
+        
+        
+class Solution:
+    def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        slow = head
+        fast = head
+        
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            
+        return slow
+ -----------------------------------------------------------------------------------------------------------
+ 
+        
         
         
         
